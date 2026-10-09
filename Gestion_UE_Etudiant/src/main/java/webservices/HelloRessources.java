@@ -29,7 +29,7 @@ public class HelloRessources {
     // Example: /hello/Ahmed -> will return "Hello Ahmed!"
     @GET
     @Path("/{name}")                          // {name} is a dynamic variable in the URL
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response sayHelloT(@PathParam(value = "name") String name) {
         // Build a personalized response message using the provided name
         return Response
