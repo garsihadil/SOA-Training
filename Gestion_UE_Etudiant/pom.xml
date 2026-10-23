@@ -8,17 +8,23 @@
     <artifactId>Gestion_UE_VF</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- pas de web.xml : l'application JAX-RS est activée par @ApplicationPath -->
+        <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
+
     <dependencies>
+        <!-- JWT (Atelier 5 - sécurité) -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.6.0</version>
         </dependency>
+        <!-- JAX-RS : implémentation Jersey -->
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
@@ -34,22 +40,23 @@
             <artifactId>jersey-hk2</artifactId>
             <version>2.27</version>
         </dependency>
-
+        <!-- Sérialisation JSON (Jackson) : même version que le reste de Jersey -->
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
-            <version>2.25.1</version>
-        </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
+            <version>2.27</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
             <version>2.3.3</version>
+        </dependency>
+        <!-- Fourni par Tomcat 9 à l'exécution -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

@@ -1,15 +1,19 @@
 package entities;
 
+import java.util.Objects;
+
 public class Module {
     private String matricule;
     private String nom;
     private int coefficient;
     private int volumeHoraire;
     private TypeModule type;
-    private UniteEnseignement uniteEnseignement; // Référence vers l'UE associée
+    private UniteEnseignement uniteEnseignement; // Référence vers l'UE associée (1 UE -> * Modules)
 
-    public Module(){}
-    // Constructeur
+    public Module() {
+    }
+
+    // Constructeurs
     public Module(String matricule, String nom, int coefficient, int volumeHoraire, TypeModule type) {
         this.matricule = matricule;
         this.nom = nom;
@@ -17,14 +21,13 @@ public class Module {
         this.volumeHoraire = volumeHoraire;
         this.type = type;
     }
-    public Module(String matricule, String nom, int coefficient, int volumeHoraire, TypeModule type,UniteEnseignement uniteEnseignement) {
-        this.matricule = matricule;
-        this.nom = nom;
-        this.coefficient = coefficient;
-        this.volumeHoraire = volumeHoraire;
-        this.type = type;
-        this.uniteEnseignement=uniteEnseignement;
+
+    public Module(String matricule, String nom, int coefficient, int volumeHoraire, TypeModule type,
+                  UniteEnseignement uniteEnseignement) {
+        this(matricule, nom, coefficient, volumeHoraire, type);
+        this.uniteEnseignement = uniteEnseignement;
     }
+
     // Enumération TypeModule
     public enum TypeModule {
         TRANSVERSAL,
@@ -81,5 +84,25 @@ public class Module {
         this.uniteEnseignement = uniteEnseignement;
     }
 
+    /*
+     * equals() est utilisée par la plupart des collections pour déterminer
+     * si une collection contient un élément donné (ex: List.contains).
+     * Deux modules sont égaux s'ils ont le même matricule (identifiant métier).
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Module module = (Module) o;
+        return Objects.equals(matricule, module.matricule);
+    }
 
+    /*
+     * hashCode() est utilisée pour déterminer où stocker et où chercher
+     * l'objet en interne (HashMap, HashSet...). Doit être cohérente avec equals().
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(matricule);
+    }
 }
